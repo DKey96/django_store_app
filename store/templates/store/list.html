@@ -3,8 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Electronics Page</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" >
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
+
+{% load i18n %} <!-- This allows us to have translation as on the line 25 -->
+{% load static %}
 <body>
 {% if messages %}
 <ul class="messages">
@@ -17,6 +22,7 @@
     {% endfor %}
 </ul>
 {% endif %}
+<h1>{% trans "Welcome to our website" %}</h1>
 <h1>Hello there {{request.session.customer}}, globomantics e-commerce store page was  visited by you exactly: {{request.COOKIES.visits|default:"1"}} times</h1>
 <table class="table table-bordered">
   <thead>

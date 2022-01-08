@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.utils.translation import gettext
 from django.views import View
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
@@ -42,7 +43,8 @@ class ElectronicsView(View):
         pages = request.GET.get('page', 1)
         name = "Daniel"
         # showing message to the user
-        messages.info(request, "Customer Successfully Fetched")
+        message = gettext("Customer Successfully Fetched")
+        messages.info(request, message)
         try:
             items = paginator.page(pages)
         except PageNotAnInteger:
