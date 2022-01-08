@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -40,8 +41,8 @@ class ElectronicsView(View):
                               2)  # Used for adding paginations, where number is a count of elements for one "page"
         pages = request.GET.get('page', 1)
         name = "Daniel"
-
-        self.process()
+        # showing message to the user
+        messages.info(request, "Customer Successfully Fetched")
         try:
             items = paginator.page(pages)
         except PageNotAnInteger:
@@ -61,18 +62,19 @@ class ElectronicsView(View):
             response.set_cookie('visits', 1)
         return response
 
-    @staticmethod
-    def process():
-        print("We are processing Electronics")
 
 class LogoutView(View):
-    def get(self, request):
+    @staticmethod
+    def get(request):
         try:
             del request.session["customer"]
         except KeyError:
             print("Error while logging our.")
         return HttpResponse("You are logged out.")
+
+
 '''Deprecated -> Not used. Just for testing different behaviors of Django views models'''
+
 
 class ElectronicsViewExplTemp(TemplateView):
     template_name = 'store/list.html'
@@ -91,7 +93,8 @@ class ElectronicsViewList(ListView):
 
 
 class ComputersView(ElectronicsView):
-    def process(self):
+    @staticmethod
+    def process():
         print("We are processing Computers")
 
 
